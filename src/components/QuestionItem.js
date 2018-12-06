@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class QuestionItem extends Component {
+  handleViewQ = () => {
+    // TODO: Link to view a question
+  }
+
   render() {
-    console.log(this.props)
     return (
       <div className='question-item'>
         <div className='avatar'>
@@ -16,6 +19,9 @@ class QuestionItem extends Component {
             <br/>
             <span>{this.props.questionItem.optionTwo.text}</span>
           </div>
+          <button onClick={this.handleViewQ}>
+            VIEW QUESTION
+          </button>
         </div>
       </div>
     )
@@ -24,7 +30,7 @@ class QuestionItem extends Component {
 
 function mapStateToProps({ questions, users }, {id}) {
   const questionItem = questions[id]
-  const avatar = users[questions[id].author].avatarURL
+  const avatar = users[questionItem.author].avatarURL
 
   return {
     questionItem,

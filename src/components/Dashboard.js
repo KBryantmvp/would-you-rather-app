@@ -8,15 +8,21 @@ class Dashboard extends Component {
   }
 
   displayUnansQs = () => {
-    this.setState(() => ({
+    // this.setState(() => ({
+    //   showAnsweredQs: false
+    // }))
+    this.setState({
       showAnsweredQs: false
-    }))
+    })
   }
 
   displayAnsQs = () => {
-    this.setState(() => ({
+    // this.setState(() => ({
+    //   showAnsweredQs: true
+    // }))
+    this.setState({
       showAnsweredQs: true
-    }))
+    })
   }
 
   calculateUnanswered = (array) => {

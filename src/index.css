@@ -29,7 +29,10 @@ li {
 }
 
 .center {
-  text-align: center
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .question-list {
@@ -43,6 +46,10 @@ li {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+form {
+  text-align: left
 }
 
 /* .avatar {
