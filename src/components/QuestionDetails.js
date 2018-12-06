@@ -15,7 +15,6 @@ class QuestionDetails extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    // console.log(this.state.value)
     const { authedUser, qid, dispatch } = this.props
     const answer = this.state.value
 
@@ -23,10 +22,12 @@ class QuestionDetails extends Component {
   }
 
   render() {
-    const { avatar, question, hasAnswered } = this.props
+    const { avatar, question, hasAnswered, answerVoted } = this.props
     const optionOne = question.optionOne.text
     const optionTwo = question.optionTwo.text
-    // console.log(this.props)
+    const votesOptionOne = question.optionOne.votes.length
+    const votesOptionTwo = question.optionTwo.votes.length
+    const totalVotes = votesOptionOne + votesOptionTwo
 
     return (
       <div>
@@ -48,7 +49,17 @@ class QuestionDetails extends Component {
                   </form>
                 </div>
               : <div className='results'>
-                  RESULTS
+                  <h3>RESULTS:</h3>
+                  <div className='results-answer'>
+                    <div className={'optionOne ' + (answerVoted === 'optionOne' ? 'answer' : '')}>
+                      <h4>{optionOne}</h4>
+                      <span>{votesOptionOne} out of {totalVotes} votes ({(votesOptionOne/totalVotes*100).toFixed(1)}%)</span>
+                    </div>
+                    <div className={'optionTwo ' + (answerVoted === 'optionTwo' ? 'answer' : '')}>
+                      <h4>{optionTwo}</h4>
+                      <span>{votesOptionTwo} out of {totalVotes} votes ({(votesOptionTwo/totalVotes*100).toFixed(1)}%)</span>
+                    </div>
+                  </div>
                 </div>
             }
           </div>
@@ -62,13 +73,20 @@ function mapStateToProps ({ authedUser, questions, users }) {
   const qid = 'xj352vofupe1dqz9emx13r'
   const question = questions[qid]
   const avatar = users[question.author].avatarURL
-  // const hasAnswered = users[authedUser].answers[id]
+  let answerVoted = ''
+  
+  if (question.optionOne.votes.indexOf(authedUser) >= 0)
+    answerVoted = 'optionOne'
+
+  if (question.optionTwo.votes.indexOf(authedUser) >= 0)
+    answerVoted = 'optionTwo'
 
   return {
     qid,
     authedUser,
     question,
     avatar,
+    answerVoted,
     hasAnswered: users[authedUser].answers[qid]
       ? true
       : false

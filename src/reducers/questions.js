@@ -9,8 +9,6 @@ export default function questions (state = {}, action) {
         ...action.questions
       }
     case VOTE_QUESTION :
-    // console.log(state[action.qid].optionOne.text)
-    // console.log(state[action.qid].optionOne.votes)
       return {
         ...state,
         [action.qid]: {
