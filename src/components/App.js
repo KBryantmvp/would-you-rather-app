@@ -4,6 +4,7 @@ import { handleInitialData } from '../actions/shared'
 import Dashboard from './Dashboard';
 import QuestionDetails from './QuestionDetails';
 import NewQuestion from './NewQuestion';
+import LeaderBoard from './LeaderBoard';
 
 class App extends Component {
   componentDidMount() {
@@ -14,7 +15,7 @@ class App extends Component {
       <div>
         {this.props.loading === true
           ? null
-          : <NewQuestion />
+          : <LeaderBoard />
         }
       </div>
     );

@@ -7,6 +7,7 @@ class QuestionItem extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div className='question-item'>
         <div className='avatar'>
