@@ -1,4 +1,5 @@
 import { saveQuestionAnswer, saveQuestion } from "../utils/api";
+import { showLoading, hideLoading } from 'react-redux-loading'
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const VOTE_QUESTION = 'VOTE_QUESTION'
@@ -41,12 +42,13 @@ function newQuestion (question) {
 
 export function handleNewQuestion (question) {
   return (dispatch) => {
-
+    dispatch(showLoading())
     return saveQuestion(question)
       .catch((e) => {
         console.warn('Error in handleNewQuestion: ', e)
         alert('There was an error submitting the question. Try again')
       })
         .then((question) => dispatch(newQuestion(question)))
+        .then(() => dispatch(hideLoading()))
   }
 }
