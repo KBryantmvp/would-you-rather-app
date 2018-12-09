@@ -30,47 +30,42 @@ class QuestionDetails extends Component {
     const totalVotes = votesOptionOne + votesOptionTwo
 
     return (
-      <div>
-        <div>
-          NAV BAR
-        </div>
-        <div className='center'>
-          <h2>WOULD YOU RATHER...</h2>
-          <div className='question-item'>
-            <div className='avatar'>
-              {avatar}
-            </div>
-            {hasAnswered === false
-              ? <div className='options'>
-                  <form onSubmit={this.handleSubmit}>
-                    <input type='radio' checked={this.state.value === 'optionOne'} value='optionOne' onChange={this.handleChange}/>{optionOne} <br/>
-                    <input type='radio' checked={this.state.value === 'optionTwo'} value='optionTwo' onChange={this.handleChange}/>{optionTwo}<br/>
-                    <input type='submit' value='Submit' />
-                  </form>
-                </div>
-              : <div className='results'>
-                  <h3>RESULTS:</h3>
-                  <div className='results-answer'>
-                    <div className={'optionOne ' + (answerVoted === 'optionOne' ? 'answer' : '')}>
-                      <h4>{optionOne}</h4>
-                      <span>{votesOptionOne} out of {totalVotes} votes ({(votesOptionOne/totalVotes*100).toFixed(1)}%)</span>
-                    </div>
-                    <div className={'optionTwo ' + (answerVoted === 'optionTwo' ? 'answer' : '')}>
-                      <h4>{optionTwo}</h4>
-                      <span>{votesOptionTwo} out of {totalVotes} votes ({(votesOptionTwo/totalVotes*100).toFixed(1)}%)</span>
-                    </div>
+      <div className='center'>
+        <h2>WOULD YOU RATHER...</h2>
+        <div className='question-item'>
+          <div className='avatar'>
+            {avatar}
+          </div>
+          {hasAnswered === false
+            ? <div className='options'>
+                <form onSubmit={this.handleSubmit}>
+                  <input type='radio' checked={this.state.value === 'optionOne'} value='optionOne' onChange={this.handleChange}/>{optionOne} <br/>
+                  <input type='radio' checked={this.state.value === 'optionTwo'} value='optionTwo' onChange={this.handleChange}/>{optionTwo}<br/>
+                  <input type='submit' value='Submit' />
+                </form>
+              </div>
+            : <div className='results'>
+                <h3>RESULTS:</h3>
+                <div className='results-answer'>
+                  <div className={'optionOne ' + (answerVoted === 'optionOne' ? 'answer' : '')}>
+                    <h4>{optionOne}</h4>
+                    <span>{votesOptionOne} out of {totalVotes} votes ({(votesOptionOne/totalVotes*100).toFixed(1)}%)</span>
+                  </div>
+                  <div className={'optionTwo ' + (answerVoted === 'optionTwo' ? 'answer' : '')}>
+                    <h4>{optionTwo}</h4>
+                    <span>{votesOptionTwo} out of {totalVotes} votes ({(votesOptionTwo/totalVotes*100).toFixed(1)}%)</span>
                   </div>
                 </div>
-            }
-          </div>
+              </div>
+          }
         </div>
       </div>
     )
   }
 }
 
-function mapStateToProps ({ authedUser, questions, users }) {
-  const qid = 'xj352vofupe1dqz9emx13r'
+function mapStateToProps ({ authedUser, questions, users }, props) {
+  const qid = props.match.params.id
   const question = questions[qid]
   const avatar = users[question.author].avatarURL
   let answerVoted = ''

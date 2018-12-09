@@ -8,18 +8,12 @@ class Dashboard extends Component {
   }
 
   displayUnansQs = () => {
-    // this.setState(() => ({
-    //   showAnsweredQs: false
-    // }))
     this.setState({
       showAnsweredQs: false
     })
   }
 
   displayAnsQs = () => {
-    // this.setState(() => ({
-    //   showAnsweredQs: true
-    // }))
     this.setState({
       showAnsweredQs: true
     })
@@ -37,9 +31,6 @@ class Dashboard extends Component {
 
     return (
       <div>
-        <div>
-          NAV BAR
-        </div>
         <div className='center'>
           <div>
             <button type='button' onClick={this.displayUnansQs}>Unanswered Questions</button>

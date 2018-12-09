@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleNewQuestion } from '../actions/questions';
+import { Redirect } from 'react-router-dom'
 
 class NewQuestion extends Component {
   state = {
     optionOneText: '',
-    optionTwoText: ''
+    optionTwoText: '',
+    toHome: false
   }
 
   handleChange = (e) => {
@@ -24,29 +26,28 @@ class NewQuestion extends Component {
 
     this.setState({
       optionOneText: '',
-      optionTwoText: ''
+      optionTwoText: '',
+      toHome: true
     })
-    // TODO: REDIRECT TO /HOME PAGE
   }
 
   render () {
-    const { optionOneText, optionTwoText } = this.state
+    const { optionOneText, optionTwoText, toHome } = this.state
+
+    if (toHome === true) {
+      return <Redirect to='/' />
+    }
 
     return (
-      <div>
-        <div>
-          NAV BAR
-        </div>
-        <div className='center'>
-          <h2>CREATE NEW QUESTION</h2>
-          <div className='new-question'>
-            <h4>Would you rather...</h4>
-            <form onSubmit={this.handleSubmit}>
-              <input type='text' name='optionOneText' onChange={this.handleChange} value={this.state.optionOneText}></input> <br/>
-              <input type='text' name='optionTwoText' onChange={this.handleChange} value={this.state.optionTwoText}></input> <br/>
-              <input type='submit' value='Submit' disabled={!(optionOneText && optionTwoText)}></input>
-            </form>
-          </div>
+      <div className='center'>
+        <h2>CREATE NEW QUESTION</h2>
+        <div className='new-question'>
+          <h4>Would you rather...</h4>
+          <form onSubmit={this.handleSubmit}>
+            <input type='text' name='optionOneText' onChange={this.handleChange} value={this.state.optionOneText}></input> <br/>
+            <input type='text' name='optionTwoText' onChange={this.handleChange} value={this.state.optionTwoText}></input> <br/>
+            <input type='submit' value='Submit' disabled={!(optionOneText && optionTwoText)}></input>
+          </form>
         </div>
       </div>
     )

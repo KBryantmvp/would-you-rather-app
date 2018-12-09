@@ -7,18 +7,13 @@ class LeaderBoard extends Component {
     const { scoreUsers } = this.props
 
     return (
-      <div>
-        <div>
-          NAV
-        </div>
-        <div className='center'>
-          <ul className='leader-list'>
-            {scoreUsers.sort((a,b) => b.totalScore - a.totalScore)
-              .map((user, index) => (
-                <LeaderItem key={index} scoreUser={user} />
-            ))}
-          </ul>
-        </div>
+      <div className='center'>
+        <ul className='leader-list'>
+          {scoreUsers.sort((a,b) => b.totalScore - a.totalScore)
+            .map((user, index) => (
+              <LeaderItem key={index} scoreUser={user} />
+          ))}
+        </ul>
       </div>
     )
   }
