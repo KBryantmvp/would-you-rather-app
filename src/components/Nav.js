@@ -8,7 +8,10 @@ class Nav extends Component {
     // TODO: SIGN OUT
   }
   render () {
+    const { authedUser } = this.props
     console.log(this.props)
+    console.log('NAV', authedUser)
+
     return (
       <nav className='nav'>
         <ul>
@@ -28,10 +31,15 @@ class Nav extends Component {
             </NavLink>
           </li>
           <li>
-            <span>Welcome, {this.props.authedUser}</span>
-            <NavLink to='/login' activeClassName='active' onClick={this.signOut}>
-              Sign Out
-            </NavLink>
+            {authedUser
+              ? <div>
+                  <span>Welcome, {authedUser}</span>
+                  <NavLink to='/login' activeClassName='active' onClick={this.signOut}>
+                    Sign Out
+                  </NavLink>
+                </div>
+              : <span>Please sign in</span>
+            }
           </li>
         </ul>
       </nav>
@@ -40,8 +48,13 @@ class Nav extends Component {
 }
 
 function mapStateToProps ({ authedUser, users }) {
+  console.log('AUTHED_USER', authedUser)
+  // console.log(users)
   return {
-    authedUser: users[authedUser].name
+    authedUser: authedUser === true
+      ? users[authedUser].name
+      : null
+    // authedUser: users[authedUser].name
   }
 }
 

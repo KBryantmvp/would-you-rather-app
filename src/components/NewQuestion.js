@@ -45,6 +45,7 @@ class NewQuestion extends Component {
           <h4>Would you rather...</h4>
           <form onSubmit={this.handleSubmit}>
             <input type='text' name='optionOneText' onChange={this.handleChange} value={this.state.optionOneText}></input> <br/>
+            <span>Or...</span> <br/>
             <input type='text' name='optionTwoText' onChange={this.handleChange} value={this.state.optionTwoText}></input> <br/>
             <input type='submit' value='Submit' disabled={!(optionOneText && optionTwoText)}></input>
           </form>

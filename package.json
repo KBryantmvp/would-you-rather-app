@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "react": "^16.6.3",
+    "react-bootstrap": "^0.32.4",
     "react-dom": "^16.6.3",
     "react-redux": "^5.1.1",
     "react-redux-loading": "^1.0.1",

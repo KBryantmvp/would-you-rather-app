@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import QuestionItem from './QuestionItem';
+import { Redirect } from 'react-router-dom'
 
 class Dashboard extends Component {
   state = {
@@ -27,7 +28,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { showAnsweredQs } = this.state
+    const { authedUser, showAnsweredQs } = this.state
 
     return (
       <div>
@@ -59,8 +60,10 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps ({ authedUser, questions, users }) {
+  console.log(authedUser)
   let answeredIds = Object.keys(users[authedUser].answers)
   let sortedAnswerIds = answeredIds.sort((a,b) => questions[b].timestamp - questions[a].timestamp)
+  console.log(authedUser)
 
   return {
     authedUser,
