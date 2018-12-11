@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter, Route, withRouter } from 'react-router-dom'
+import { Switch, Route, withRouter, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import Dashboard from './Dashboard';
@@ -30,21 +30,27 @@ class App extends Component {
                 <Route path='/question/:id' component={QuestionDetails}/>
               </div>
           } */}
-          <Route path='/login' component={Login} />
-          <Route path='/' exact component={Dashboard} />
-          <Route path='/add' exact component={NewQuestion} />
-          <Route path='/leaderboard' exact component={LeaderBoard} />
-          <Route path='/question/:id' component={QuestionDetails}/>
+          <Switch>
+            {this.props.loggedIn
+              ? <Route path='/' exact component={Dashboard} />
+              : <Redirect to='/login'/>
+            }
+            <Route path='/login' component={Login} />
+            <Route path='/add' exact component={NewQuestion} />
+            <Route path='/leaderboard' exact component={LeaderBoard} />
+            <Route path='/question/:id' component={QuestionDetails}/>
+          </Switch>
         </div>
     );
   }
 }
 
-// function mapStateToProps ({ authedUser }) {
-//   return {
-//     loading: authedUser === null
-//   }
-// }
+function mapStateToProps ({ authedUser }) {
+  return {
+    loggedIn: authedUser !== null
+    // loading: authedUser === null
+  }
+}
 
-// export default connect(mapStateToProps)(App)
-export default withRouter(connect()(App))
+export default connect(mapStateToProps)(App)
+// export default withRouter(connect()(App))
