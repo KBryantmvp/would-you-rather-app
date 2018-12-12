@@ -7,20 +7,16 @@ import { Redirect } from 'react-router-dom'
 class Login extends Component {
 
   handleSetAuthedUser(userId) {
-    // e.preventDefault()
-    // console.log(e)
-    console.log(userId)
     const { dispatch } = this.props
     dispatch(setAuthedUser(userId))
   }
 
   render () {
     const { authedUser, usersArr } = this.props
-    console.log('AUTHED_USER', authedUser)
+
     if (authedUser !== null) {
       return <Redirect to='/' />
     }
-    console.log(this.props)
 
     return (
       <div className='center'>
@@ -42,7 +38,6 @@ class Login extends Component {
 }
 
 function mapStateToProps ({ authedUser, users }) {
-  console.log('HE ENTRADO EN LOGIN')
   return {
     authedUser,
     usersArr: Object.keys(users).reduce((usersAcc, user) => (

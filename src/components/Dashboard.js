@@ -28,7 +28,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { authedUser, showAnsweredQs } = this.state
+    const { showAnsweredQs } = this.state
 
     return (
       <div>
@@ -60,10 +60,8 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps ({ authedUser, questions, users }) {
-  console.log(authedUser)
   let answeredIds = Object.keys(users[authedUser].answers)
   let sortedAnswerIds = answeredIds.sort((a,b) => questions[b].timestamp - questions[a].timestamp)
-  console.log(authedUser)
 
   return {
     authedUser,
