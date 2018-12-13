@@ -13,9 +13,10 @@ class Login extends Component {
 
   render () {
     const { authedUser, usersArr } = this.props
+    const { from } = this.props.location.state || { from: { pathname: '/' }}
 
     if (authedUser !== null) {
-      return <Redirect to='/' />
+      return <Redirect to={from} />
     }
 
     return (

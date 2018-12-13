@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
@@ -9,6 +9,8 @@ import LeaderBoard from './LeaderBoard';
 import Nav from './Nav'
 import LoadingBar from 'react-redux-loading'
 import Login from './Login';
+import NoMatch from './NoMatch';
+import PrivateRoute from './PrivateRoute'
 
 class App extends Component {
   componentDidMount() {
@@ -24,9 +26,10 @@ class App extends Component {
               this.props.loggedIn ? <Dashboard/> : <Redirect to='/login'/>
             )}/>
             <Route path='/login' component={Login} />
-            <Route path='/add' exact component={NewQuestion} />
-            <Route path='/leaderboard' exact component={LeaderBoard} />
-            <Route path='/question/:id' component={QuestionDetails}/>
+            <PrivateRoute path='/add' exact component={NewQuestion} />
+            <PrivateRoute path='/leaderboard' exact component={LeaderBoard} />
+            <PrivateRoute path='/question/:id' component={QuestionDetails}/>
+            <Route component={NoMatch} />
           </Switch>
         </div>
     );
