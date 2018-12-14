@@ -18,20 +18,21 @@ class App extends Component {
   }
   render() {
     return (
-        <div className='container'>
-          <LoadingBar />
-          <MyNav />
-          <Switch>
-            <Route path='/' exact render={props => (
-              this.props.loggedIn ? <Dashboard/> : <Redirect to='/login'/>
-            )}/>
-            <Route path='/login' component={Login} />
-            <PrivateRoute path='/add' exact component={NewQuestion} />
-            <PrivateRoute path='/leaderboard' exact component={LeaderBoard} />
-            <PrivateRoute path='/question/:id' component={QuestionDetails}/>
-            <Route component={NoMatch} />
-          </Switch>
-        </div>
+      <div className='container'>
+        <LoadingBar />
+        <MyNav />
+        <Switch>
+          <Route path='/' exact render={props => (
+            this.props.loggedIn ? <Dashboard/> : <Redirect to='/login'/>
+          )}/>
+          {/* Only allow to go to private routes if user is logged in */}
+          <Route path='/login' component={Login} />
+          <PrivateRoute path='/add' exact component={NewQuestion} />
+          <PrivateRoute path='/leaderboard' exact component={LeaderBoard} />
+          <PrivateRoute path='/question/:id' component={QuestionDetails}/>
+          <Route component={NoMatch} />
+        </Switch>
+      </div>
     );
   }
 }

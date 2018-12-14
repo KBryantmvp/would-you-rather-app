@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import LeaderItem from './LeaderItem'
 import { Jumbotron, ListGroup, ListGroupItem } from 'react-bootstrap'
 
+// View that displays the list of users and their score
 class LeaderBoard extends Component {
   render () {
     const { scoreUsers } = this.props
@@ -27,6 +28,7 @@ function mapStateToProps({ users }) {
     return usersAcc.concat(users[user])
   },[])
 
+  // Create a new array that will store objects of users with new properties
   const scoreUsers = usersArr.map(user => ({
     id: user.id,
     name: user.name,
@@ -38,7 +40,6 @@ function mapStateToProps({ users }) {
 
   return {
     scoreUsers,
-    usersArr,
   }
 }
 

@@ -9,6 +9,8 @@ export default function users (state = {}, action) {
         ...state,
         ...action.users
       }
+    // Update the 'answers' property of the User object wit the new
+    // question ID and the answer selected
     case VOTE_QUESTION :
       return {
         ...state,
@@ -20,6 +22,7 @@ export default function users (state = {}, action) {
           }
         }
       }
+    // Update the 'questions' property in User object wit the new question created
     case NEW_QUESTION :
       return {
         ...state,

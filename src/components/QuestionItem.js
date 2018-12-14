@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+// Component that display each question with the different info
+// required to be displayed for that particular question
 class QuestionItem extends Component {
   render() {
     return (

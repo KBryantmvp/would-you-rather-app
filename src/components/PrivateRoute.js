@@ -2,6 +2,8 @@ import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
+// User will be allowed to navigate to private routes if it has logged in already.
+// Otherwise, the /login page will be displayed
 function PrivateRoute ({ component: Component, ...rest }) {
   return (
     <Route {...rest} render={props => (

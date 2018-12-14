@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import QuestionItem from './QuestionItem';
 import { Jumbotron, ListGroup, ListGroupItem } from 'react-bootstrap'
 
+// Main view displayed when user logs in.
+// It shows a list of unanswered and answered questions
+
 class Dashboard extends Component {
   state = {
     showAnsweredQs: false
@@ -20,8 +23,9 @@ class Dashboard extends Component {
     })
   }
 
-  calculateUnanswered = (array) => {
-    var unansweredQ = array.filter((e) => (
+  // function to extract unanswered questions from all possible questions
+  calculateUnanswered = (questions) => {
+    var unansweredQ = questions.filter((e) => (
       this.props.sortedAnswerIds.indexOf(e) < 0
     ))
     return unansweredQ
@@ -56,6 +60,8 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps ({ authedUser, questions, users }) {
+  // Get all answer IDs from the logged in user's answer object
+  // and sort by timestamp
   let answeredIds = Object.keys(users[authedUser].answers)
   let sortedAnswerIds = answeredIds.sort((a,b) => questions[b].timestamp - questions[a].timestamp)
 

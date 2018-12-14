@@ -9,6 +9,7 @@ export default function questions (state = {}, action) {
         ...state,
         ...action.questions
       }
+    // Update the 'votes' property of the specified option selected (optionOne or optionTwo)
     case VOTE_QUESTION :
       return {
         ...state,

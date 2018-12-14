@@ -17,6 +17,9 @@ class NewQuestion extends Component {
     })
   }
 
+  // Function that saves the new question in the store with the
+  // two possible answers and the user that creates the new question.
+  // Once it is saved, the user will be redirected to the Home page '/'
   handleSubmit = (e) => {
     e.preventDefault()
 
@@ -35,6 +38,7 @@ class NewQuestion extends Component {
   render () {
     const { optionOneText, optionTwoText, toHome } = this.state
 
+    // Redirect the user to the Home view after submitting a new question
     if (toHome === true) {
       return <Redirect to='/' />
     }
@@ -45,10 +49,26 @@ class NewQuestion extends Component {
         <div className='new-question'>
           <h4>Would you rather...</h4>
           <form onSubmit={this.handleSubmit}>
-            <input type='text' name='optionOneText' placeholder='Enter option one...' onChange={this.handleChange} value={this.state.optionOneText}></input> <br/>
+            <input
+              type='text'
+              name='optionOneText'
+              placeholder='Enter option one...'
+              onChange={this.handleChange}
+              value={this.state.optionOneText}>
+            </input><br/>
             <span>Or...</span> <br/>
-            <input type='text' name='optionTwoText' placeholder='Enter option two...' onChange={this.handleChange} value={this.state.optionTwoText}></input> <br/>
-            <input type='submit' value='Submit' disabled={!(optionOneText && optionTwoText)}></input>
+            <input
+              type='text'
+              name='optionTwoText'
+              placeholder='Enter option two...'
+              onChange={this.handleChange}
+              value={this.state.optionTwoText}>
+              </input><br/>
+            <input
+              type='submit'
+              value='Submit'
+              disabled={!(optionOneText && optionTwoText)}>
+            </input>
           </form>
         </div>
       </Jumbotron>

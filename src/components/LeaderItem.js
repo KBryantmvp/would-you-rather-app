@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 
+// View that displays each particular user and his info in the leader board
 class LeaderItem extends Component {
   render () {
     const { scoreUser } = this.props

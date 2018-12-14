@@ -12,6 +12,7 @@ export function receiveQuestions (questions) {
   }
 }
 
+// Function to update the store with the question's vote
 function voteQuestion ({ authedUser, qid, answer }) {
   return {
     type: VOTE_QUESTION,
@@ -21,6 +22,7 @@ function voteQuestion ({ authedUser, qid, answer }) {
   }
 }
 
+// Async function to vote question and save the answer in the database
 export function handleVoteQuestion (info) {
   return (dispatch) => {
     dispatch(voteQuestion(info))
@@ -33,6 +35,7 @@ export function handleVoteQuestion (info) {
   }
 }
 
+// Function to update the store with the new question submitted
 function newQuestion (question) {
   return {
     type: NEW_QUESTION,
@@ -40,6 +43,7 @@ function newQuestion (question) {
   }
 }
 
+// Async function to update the database with the new question submitted
 export function handleNewQuestion (question) {
   return (dispatch) => {
     dispatch(showLoading())

@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { unsetAuthedUser } from '../actions/authedUser';
 import { Nav, Navbar, NavItem } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
+// Component that renders the navigation bar at the top of the App
+// and allows to go to the different App views
 class MyNav extends Component {
   signOut (e) {
     const { dispatch } = this.props
 
     dispatch(unsetAuthedUser)
-    // this.props.history.push('/')
+
   }
   render () {
     const { authedUser } = this.props

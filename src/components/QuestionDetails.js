@@ -25,6 +25,9 @@ class QuestionDetails extends Component {
 
   render() {
     const { avatarURL, question, hasAnswered, answerVoted } = this.props
+
+    // If user tries to manually enter an address with a question ID in the URL that does not exist
+    // a 404 PAGE NOT FOUND page will be displayed
     if (!question) {
       return <Redirect to='/404-page-not-found'/>
     }
@@ -42,6 +45,9 @@ class QuestionDetails extends Component {
             <img src={avatarURL} alt='avatar-image'>
             </img>
           </div>
+          {/* If logged in user has not answered the question that is trying to view,
+            * the two options to vote will be displayed. Otherwise, he will be able
+            * to see the results with his previously submitted vote clearly marked */}
           {hasAnswered === false
             ? <div className='options'>
                 <form onSubmit={this.handleSubmit}>
@@ -77,7 +83,10 @@ class QuestionDetails extends Component {
 }
 
 function mapStateToProps ({ authedUser, questions, users }, props) {
+  // qid extracted from the URL
   const qid = props.match.params.id
+
+  // Retrieve the question from the redux store that matches the qid in the URL
   const question = questions[qid]
   const avatarURL = question ? users[question.author].avatarURL : null
   let answerVoted = ''
