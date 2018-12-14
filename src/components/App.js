@@ -6,7 +6,7 @@ import Dashboard from './Dashboard';
 import QuestionDetails from './QuestionDetails';
 import NewQuestion from './NewQuestion';
 import LeaderBoard from './LeaderBoard';
-import Nav from './Nav'
+import MyNav from './MyNav'
 import LoadingBar from 'react-redux-loading'
 import Login from './Login';
 import NoMatch from './NoMatch';
@@ -17,10 +17,11 @@ class App extends Component {
     this.props.dispatch(handleInitialData())
   }
   render() {
+    console.log(this.props)
     return (
         <div className='container'>
           <LoadingBar />
-          <Nav />
+          <MyNav />
           <Switch>
             <Route path='/' exact render={props => (
               this.props.loggedIn ? <Dashboard/> : <Redirect to='/login'/>

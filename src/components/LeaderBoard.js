@@ -1,20 +1,23 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import LeaderItem from './LeaderItem'
+import { Jumbotron, ListGroup, ListGroupItem } from 'react-bootstrap'
 
 class LeaderBoard extends Component {
   render () {
     const { scoreUsers } = this.props
 
     return (
-      <div className='center'>
-        <ul className='leader-list'>
+      <Jumbotron className='center' >
+        <ListGroup className='leader-list' componentClass='ul'>
           {scoreUsers.sort((a,b) => b.totalScore - a.totalScore)
             .map((user, index) => (
-              <LeaderItem key={index} scoreUser={user} />
+              <ListGroupItem key={index} className='leader-item'>
+                <LeaderItem scoreUser={user} />
+              </ListGroupItem>
           ))}
-        </ul>
-      </div>
+        </ListGroup>
+      </Jumbotron>
     )
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleVoteQuestion } from '../actions/questions';
+import { Jumbotron } from 'react-bootstrap'
 
 class QuestionDetails extends Component {
   state = {
@@ -22,7 +23,7 @@ class QuestionDetails extends Component {
   }
 
   render() {
-    const { avatar, question, hasAnswered, answerVoted } = this.props
+    const { avatarURL, question, hasAnswered, answerVoted } = this.props
     const optionOne = question.optionOne.text
     const optionTwo = question.optionTwo.text
     const votesOptionOne = question.optionOne.votes.length
@@ -30,17 +31,26 @@ class QuestionDetails extends Component {
     const totalVotes = votesOptionOne + votesOptionTwo
 
     return (
-      <div className='center'>
+      <Jumbotron className='center'>
         <h2>WOULD YOU RATHER...</h2>
         <div className='question-item'>
           <div className='avatar'>
-            {avatar}
+            <img src={avatarURL} alt='avatar-image'>
+            </img>
           </div>
           {hasAnswered === false
             ? <div className='options'>
                 <form onSubmit={this.handleSubmit}>
-                  <input type='radio' checked={this.state.value === 'optionOne'} value='optionOne' onChange={this.handleChange}/>{optionOne} <br/>
-                  <input type='radio' checked={this.state.value === 'optionTwo'} value='optionTwo' onChange={this.handleChange}/>{optionTwo}<br/>
+                  <label>
+                    {optionOne}
+                    <input type='radio' checked={this.state.value === 'optionOne'} value='optionOne' onChange={this.handleChange}/>
+                  </label>
+                  {/* <br/> */}
+                  <label>
+                    {optionTwo}
+                    <input type='radio' checked={this.state.value === 'optionTwo'} value='optionTwo' onChange={this.handleChange}/>
+                  </label>
+                  {/* <br/> */}
                   <input type='submit' value='Submit' />
                 </form>
               </div>
@@ -59,7 +69,7 @@ class QuestionDetails extends Component {
               </div>
           }
         </div>
-      </div>
+      </Jumbotron>
     )
   }
 }
@@ -67,7 +77,7 @@ class QuestionDetails extends Component {
 function mapStateToProps ({ authedUser, questions, users }, props) {
   const qid = props.match.params.id
   const question = questions[qid]
-  const avatar = users[question.author].avatarURL
+  const avatarURL = users[question.author].avatarURL
   let answerVoted = ''
   
   if (question.optionOne.votes.indexOf(authedUser) >= 0)
@@ -80,7 +90,7 @@ function mapStateToProps ({ authedUser, questions, users }, props) {
     qid,
     authedUser,
     question,
-    avatar,
+    avatarURL,
     answerVoted,
     hasAnswered: users[authedUser].answers[qid]
       ? true

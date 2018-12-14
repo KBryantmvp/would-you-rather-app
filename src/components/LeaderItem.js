@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 
 class LeaderItem extends Component {
   render () {
@@ -8,22 +8,21 @@ class LeaderItem extends Component {
     const totalScore = scoreUser.totalScore
 
     return (
-      <li>
-        <div className='leader-item'>
-          <div className='avatar'>
-            {scoreUser.avatarURL}
-          </div>
-          <div className='user-info'>
-            <h3>{scoreUser.name}</h3>
-            <span>Answered questions: {answeredQuestions}</span> <br/>
-            <span>Created questions: {questionsCreated}</span>
-          </div>
-          <div className='score'>
-            <h5>Score:</h5>
-            <span>{totalScore}</span>
-          </div>
+      <Fragment >
+        <div className='avatar'>
+        <img src={scoreUser.avatarURL} alt='avatar-image'>
+        </img>
         </div>
-      </li>
+        <div className='user-info'>
+          <h3>{scoreUser.name}</h3>
+          <span>Answered questions: {answeredQuestions}</span> <br/>
+          <span>Created questions: {questionsCreated}</span>
+        </div>
+        <div className='score'>
+          <strong>Score:</strong> <br/>
+          <span>{totalScore}</span>
+        </div>
+      </Fragment>
     )
   }
 }

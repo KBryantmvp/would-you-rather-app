@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleNewQuestion } from '../actions/questions';
 import { Redirect } from 'react-router-dom'
+import { Jumbotron } from 'react-bootstrap'
 
 class NewQuestion extends Component {
   state = {
@@ -39,18 +40,18 @@ class NewQuestion extends Component {
     }
 
     return (
-      <div className='center'>
+      <Jumbotron className='center'>
         <h2>CREATE NEW QUESTION</h2>
         <div className='new-question'>
           <h4>Would you rather...</h4>
           <form onSubmit={this.handleSubmit}>
-            <input type='text' name='optionOneText' onChange={this.handleChange} value={this.state.optionOneText}></input> <br/>
+            <input type='text' name='optionOneText' placeholder='Enter option one...' onChange={this.handleChange} value={this.state.optionOneText}></input> <br/>
             <span>Or...</span> <br/>
-            <input type='text' name='optionTwoText' onChange={this.handleChange} value={this.state.optionTwoText}></input> <br/>
+            <input type='text' name='optionTwoText' placeholder='Enter option two...' onChange={this.handleChange} value={this.state.optionTwoText}></input> <br/>
             <input type='submit' value='Submit' disabled={!(optionOneText && optionTwoText)}></input>
           </form>
         </div>
-      </div>
+      </Jumbotron>
     )
   }
 }

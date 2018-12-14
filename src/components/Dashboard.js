@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import QuestionItem from './QuestionItem';
-import { Redirect } from 'react-router-dom'
+import { Jumbotron, ListGroup, ListGroupItem } from 'react-bootstrap'
 
 class Dashboard extends Component {
   state = {
@@ -31,30 +31,26 @@ class Dashboard extends Component {
     const { showAnsweredQs } = this.state
 
     return (
-      <div>
-        <div className='center'>
-          <div>
-            <button type='button' onClick={this.displayUnansQs}>Unanswered Questions</button>
-            <button type='button' onClick={this.displayAnsQs}>Answered Questions</button>
-          </div>
-          <div>
-            <ul className='question-list'>
-              {showAnsweredQs === false
-                ? this.calculateUnanswered(this.props.questionIds).map((id) => (
-                  <li key={id}>
-                    <QuestionItem id={id}/>
-                  </li>
-                  ))
-                : this.props.sortedAnswerIds.map((id) => (
-                  <li key={id}>
-                    <QuestionItem id={id} />
-                  </li>
-                  ))
-              }
-            </ul>
-          </div>
+      <Jumbotron className='center'>
+        <div>
+          <button type='button' onClick={this.displayUnansQs}>Unanswered Questions</button>
+          <button type='button' onClick={this.displayAnsQs}>Answered Questions</button>
         </div>
-      </div>
+        <ListGroup className='question-list'>
+          {showAnsweredQs === false
+            ? this.calculateUnanswered(this.props.questionIds).map((id) => (
+              <ListGroupItem key={id} className='question-item'>
+                <QuestionItem id={id} />
+              </ListGroupItem>
+              ))
+            : this.props.sortedAnswerIds.map((id) => (
+              <ListGroupItem key={id} className='question-item'>
+                <QuestionItem id={id} />
+              </ListGroupItem>
+              ))
+          }
+        </ListGroup>
+      </Jumbotron>
     )
   }
 }
