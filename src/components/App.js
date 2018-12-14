@@ -17,7 +17,6 @@ class App extends Component {
     this.props.dispatch(handleInitialData())
   }
   render() {
-    console.log(this.props)
     return (
         <div className='container'>
           <LoadingBar />

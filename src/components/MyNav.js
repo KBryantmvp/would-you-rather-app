@@ -8,17 +8,14 @@ import { LinkContainer } from 'react-router-bootstrap'
 class MyNav extends Component {
   signOut (e) {
     const { dispatch } = this.props
-    // e.preventDefault()
 
     dispatch(unsetAuthedUser)
     // this.props.history.push('/')
   }
   render () {
     const { authedUser } = this.props
-    console.log(this.props)
 
     return (
-      // <nav className='nav'>
       <Navbar >
         <Nav bsStyle='tabs' >
           <LinkContainer to='/' exact activeClassName='active'>
@@ -48,7 +45,6 @@ class MyNav extends Component {
           }
         </Nav>
       </Navbar>
-
     )
   }
 }

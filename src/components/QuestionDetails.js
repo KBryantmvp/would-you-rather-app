@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleVoteQuestion } from '../actions/questions';
+import { Redirect } from 'react-router-dom'
 import { Jumbotron } from 'react-bootstrap'
 
 class QuestionDetails extends Component {
@@ -24,6 +25,9 @@ class QuestionDetails extends Component {
 
   render() {
     const { avatarURL, question, hasAnswered, answerVoted } = this.props
+    if (!question) {
+      return <Redirect to='/404-page-not-found'/>
+    }
     const optionOne = question.optionOne.text
     const optionTwo = question.optionTwo.text
     const votesOptionOne = question.optionOne.votes.length
@@ -45,12 +49,10 @@ class QuestionDetails extends Component {
                     {optionOne}
                     <input type='radio' checked={this.state.value === 'optionOne'} value='optionOne' onChange={this.handleChange}/>
                   </label>
-                  {/* <br/> */}
                   <label>
                     {optionTwo}
                     <input type='radio' checked={this.state.value === 'optionTwo'} value='optionTwo' onChange={this.handleChange}/>
                   </label>
-                  {/* <br/> */}
                   <input type='submit' value='Submit' />
                 </form>
               </div>
@@ -77,13 +79,13 @@ class QuestionDetails extends Component {
 function mapStateToProps ({ authedUser, questions, users }, props) {
   const qid = props.match.params.id
   const question = questions[qid]
-  const avatarURL = users[question.author].avatarURL
+  const avatarURL = question ? users[question.author].avatarURL : null
   let answerVoted = ''
   
-  if (question.optionOne.votes.indexOf(authedUser) >= 0)
+  if (question && question.optionOne.votes.indexOf(authedUser) >= 0)
     answerVoted = 'optionOne'
 
-  if (question.optionTwo.votes.indexOf(authedUser) >= 0)
+  if (question && question.optionTwo.votes.indexOf(authedUser) >= 0)
     answerVoted = 'optionTwo'
 
   return {
