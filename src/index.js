@@ -12,7 +12,7 @@ const store = createStore(reducer, middleware)
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename="/would-you-rather-app">
       <App />
     </BrowserRouter>
   </Provider>,
